@@ -6,10 +6,21 @@
 
     <groupId>nl.gpesoft</groupId>
     <artifactId>multimodule</artifactId>
-    <packaging>pom</packaging>
     <version>1.0</version>
+    <packaging>pom</packaging>
 
     <modules>
         <module>persistence</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>5.2.8.Final</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 </project>

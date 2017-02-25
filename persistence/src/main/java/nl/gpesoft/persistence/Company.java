@@ -16,6 +16,9 @@ public class Company {
     @GeneratedValue
     private Long id;
 
+    @Column (nullable = false, unique = true)
+    private String kvkNumber;
+
     @Column
     private String name;
 
@@ -31,6 +34,14 @@ public class Company {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getKvkNumber() {
+        return kvkNumber;
+    }
+
+    public void setKvkNumber(String kvkNumber) {
+        this.kvkNumber = kvkNumber;
     }
 
     public String getName() {

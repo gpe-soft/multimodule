@@ -1,33 +1,16 @@
-package nl.gpesoft.persistence;
+package nl.gpesoft.domain;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
 public class Employee {
-    @Id
-    @GeneratedValue
-    private Long id;
 
-    @Column (nullable = false, unique = true)
     private int employeeNumber;
 
-    @Column
     private int socialSecurityNumber;
 
-    @Column
     private String name;
 
-    @Column
     private Date employedDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public int getEmployeeNumber() {
         return employeeNumber;

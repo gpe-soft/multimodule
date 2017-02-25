@@ -11,6 +11,8 @@
 
     <modules>
         <module>persistence</module>
+        <module>repository</module>
+        <module>domain</module>
     </modules>
 
     <dependencyManagement>

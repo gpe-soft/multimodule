@@ -1,4 +1,4 @@
-package nl.gpesoft.repository;
+package repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

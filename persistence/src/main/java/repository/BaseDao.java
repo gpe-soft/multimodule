@@ -1,4 +1,4 @@
-package nl.gpesoft.repository;
+package repository;
 
 import java.util.List;
 

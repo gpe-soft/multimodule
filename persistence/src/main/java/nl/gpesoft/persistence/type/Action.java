@@ -1,4 +1,4 @@
-package nl.gpesoft.type;
+package nl.gpesoft.persistence.type;
 
 public enum Action {
         FORMAL_CHANGE,

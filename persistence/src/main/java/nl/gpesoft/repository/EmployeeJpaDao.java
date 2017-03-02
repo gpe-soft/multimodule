@@ -1,4 +1,4 @@
-package repository;
+package nl.gpesoft.repository;
 
 import nl.gpesoft.persistence.Employee;
 import java.util.List;

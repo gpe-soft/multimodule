@@ -6,19 +6,19 @@ import javax.persistence.Entity;
 @Entity
 public class Address extends AbstractEntity {
 
-    @Column
+    @Column (name="STREET")
     private String street;
 
-    @Column
+    @Column (name="HOUSE_NUMBER")
     private int houseNumber;
 
-    @Column
+    @Column (name="HOUSE_NUMBER_SUFFIX")
     private String houseNumberSuffix;
 
-    @Column
+    @Column (name="POSTAL_CODE")
     private String postalCode;
 
-    @Column
+    @Column (name="CITY")
     private String city;
 
     public String getStreet() {

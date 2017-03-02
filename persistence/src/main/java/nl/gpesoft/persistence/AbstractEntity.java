@@ -1,6 +1,6 @@
 package nl.gpesoft.persistence;
 
-import nl.gpesoft.type.Action;
+import nl.gpesoft.persistence.type.Action;
 
 import javax.persistence.*;
 
@@ -8,15 +8,17 @@ import javax.persistence.*;
 public abstract class AbstractEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "ID", updatable = false, nullable = false)
     private Long id;
 
-    @Column
+    @Column (name="USER_PROFILE")
     private String userProfile;
 
-    @Column
+    @Column (name="TIMESTAMP")
     private long timeStamp;
 
+    @Column (name="ACTION")
     @Enumerated(EnumType.STRING)
     private Action action;
 

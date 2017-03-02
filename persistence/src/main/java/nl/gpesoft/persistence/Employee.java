@@ -6,18 +6,20 @@ import java.util.Date;
 @Entity
 public class Employee extends AbstractEntity {
 
-    @Column (nullable = false, unique = true)
+    @Column (name="EMPLOYEE_NUMBER", nullable = false, unique = true)
     private int employeeNumber;
 
-    @Column
+    @Column (name="SOCIAL_SECURITY_NUMBER")
     private int socialSecurityNumber;
 
-    @Column
+    @Column (name="NAME")
     private String name;
 
-    @Column
+    @Column (name="EMPLOYED_DATE")
     private Date employedDate;
 
+    @OneToOne (optional = false, orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name="ADDRESS_ID")
     private Address address;
 
     public int getEmployeeNumber() {
@@ -50,5 +52,13 @@ public class Employee extends AbstractEntity {
 
     public void setEmployedDate(Date employedDate) {
         this.employedDate = employedDate;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

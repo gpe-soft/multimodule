@@ -141,7 +141,6 @@
                     <plugin>
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
-                        <version>1.1.0.Alpha11</version>
                         <configuration>
                             <jboss-home>wildfly/server/wildfly-${wildfly.version}</jboss-home>
                             <add-user>
@@ -169,7 +168,6 @@
                                 <fileset>
                                     <directory>wildfly</directory>
                                     <includes>
-                                        <include>cli/**/*</include>
                                         <include>resource/**/*</include>
                                         <include>server/**/*</include>
                                     </includes>
@@ -179,7 +177,7 @@
                     </plugin>
                 </plugins>
                 <filters>
-                    <filter>build/profile/server.properties</filter>
+                    <filter>build/server.properties</filter>
                 </filters>
             </build>
         </profile>

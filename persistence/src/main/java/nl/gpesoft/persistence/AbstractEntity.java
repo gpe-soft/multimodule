@@ -1,7 +1,6 @@
 package nl.gpesoft.persistence;
 
 import nl.gpesoft.persistence.type.Action;
-
 import javax.persistence.*;
 
 @MappedSuperclass

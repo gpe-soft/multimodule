@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Employee extends PersistableEntity {
+public class EmployeeJPA extends PersistableEntity {
 
     @Column (name="EMPLOYEE_NUMBER", nullable = false, unique = true)
     private int employeeNumber;
@@ -22,7 +22,7 @@ public class Employee extends PersistableEntity {
 
     @OneToOne (optional = false, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name="ADDRESS_ID")
-    private Address address;
+    private AddressJPA addressJPA;
 
     public int getEmployeeNumber() {
         return employeeNumber;
@@ -56,11 +56,11 @@ public class Employee extends PersistableEntity {
         this.employedDate = employedDate;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressJPA getAddressJPA() {
+        return addressJPA;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressJPA(AddressJPA addressJPA) {
+        this.addressJPA = addressJPA;
     }
 }

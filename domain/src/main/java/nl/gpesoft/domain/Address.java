@@ -1,26 +1,16 @@
-package nl.gpesoft.persistence;
+package nl.gpesoft.domain;
 
 import nl.gpesoft.persistence.base.PersistableEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
-public class Address extends PersistableEntity {
+public class Address {
 
-    @Column (name = "STREET")
     private String street;
-
-    @Column (name = "HOUSE_NUMBER")
     private int houseNumber;
-
-    @Column (name = "HOUSE_NUMBER_SUFFIX")
     private String houseNumberSuffix;
-
-    @Column (name = "POSTAL_CODE")
     private String postalCode;
-
-    @Column (name = "CITY")
     private String city;
 
     public String getStreet() {

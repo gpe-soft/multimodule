@@ -13,4 +13,11 @@
     <groupId>nl.gpesoft</groupId>
     <artifactId>domain</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>nl.gpesoft</groupId>
+            <artifactId>persistence</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

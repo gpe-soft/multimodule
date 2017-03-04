@@ -9,18 +9,15 @@ import java.util.Date;
 public class AuditEntityListener {
 
     public AuditEntityListener() {
-
     }
 
     @PrePersist
     public void prePersist(AuditableEntity auditableEntity) {
-        auditableEntity.setAction(Action.REGISTRATION);
-        auditableEntity.setUserProfile("Tom");
         auditableEntity.setTimeStamp(new Date());
     }
 
     @PreUpdate
     public void preUpdate(AuditableEntity auditableEntity) {
-
+        auditableEntity.setTimeStamp(new Date());
     }
 }

@@ -1,7 +1,7 @@
 package nl.gpesoft.repository;
 
-import nl.gpesoft.persistence.Address;
+import nl.gpesoft.persistence.AddressJPA;
 
-public interface AddressDao extends BaseDao<Integer, Address> {
+public interface AddressDao extends BaseDao<Integer, AddressJPA> {
 
 }

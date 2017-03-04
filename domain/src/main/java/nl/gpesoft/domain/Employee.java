@@ -1,16 +1,17 @@
 package nl.gpesoft.domain;
 
+import nl.gpesoft.persistence.AddressJPA;
+import nl.gpesoft.persistence.base.PersistableEntity;
+
 import java.util.Date;
 
-public class Employee {
+public class Employee extends PersistableEntity {
 
     private int employeeNumber;
-
     private int socialSecurityNumber;
-
     private String name;
-
     private Date employedDate;
+    private AddressJPA addressJPA;
 
     public int getEmployeeNumber() {
         return employeeNumber;
@@ -42,5 +43,13 @@ public class Employee {
 
     public void setEmployedDate(Date employedDate) {
         this.employedDate = employedDate;
+    }
+
+    public AddressJPA getAddressJPA() {
+        return addressJPA;
+    }
+
+    public void setAddressJPA(AddressJPA addressJPA) {
+        this.addressJPA = addressJPA;
     }
 }

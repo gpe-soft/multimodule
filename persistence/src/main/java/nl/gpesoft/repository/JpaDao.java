@@ -9,7 +9,7 @@ public abstract class JpaDao<K, E> implements BaseDao<K, E> {
 
     protected Class<E> entityClass;
 
-    @PersistenceContext
+    @PersistenceContext (name = "multimodule")
     protected EntityManager entityManager;
 
     public JpaDao() {

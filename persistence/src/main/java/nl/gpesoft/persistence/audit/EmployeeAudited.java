@@ -1,7 +1,6 @@
 package nl.gpesoft.persistence.audit;
 
-import nl.gpesoft.persistence.Address;
-import nl.gpesoft.persistence.base.PersistableEntity;
+import nl.gpesoft.persistence.AddressJPA;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,7 +22,7 @@ public class EmployeeAudited extends AuditableEntity {
 
     @OneToOne (optional = false, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name="ADDRESS_ID")
-    private Address address;
+    private AddressJPA addressJPA;
 
     public int getEmployeeNumber() {
         return employeeNumber;
@@ -57,11 +56,11 @@ public class EmployeeAudited extends AuditableEntity {
         this.employedDate = employedDate;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressJPA getAddressJPA() {
+        return addressJPA;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressJPA(AddressJPA addressJPA) {
+        this.addressJPA = addressJPA;
     }
 }

@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>multimodule</artifactId>
         <groupId>nl.gpesoft</groupId>
+        <artifactId>multimodule</artifactId>
         <version>1.0</version>
     </parent>
 
     <artifactId>hosting</artifactId>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -20,55 +21,6 @@
     </properties>
 
     <profiles>
-        <!--<profile>-->
-            <!--<id>prepare-wildfly-properties</id>-->
-            <!--<build>-->
-                <!--<plugins>-->
-                    <!--<plugin>-->
-                        <!--<groupId>org.apache.maven.plugins</groupId>-->
-                        <!--<artifactId>maven-resources-plugin</artifactId>-->
-                        <!--<executions>-->
-                            <!--<execution>-->
-                                <!--<id>copy-application-config</id>-->
-                                <!--<phase>generate-resources</phase>-->
-                                <!--<goals>-->
-                                    <!--<goal>copy-resources</goal>-->
-                                <!--</goals>-->
-                                <!--<configuration>-->
-                                    <!--<outputDirectory>wildfly/server/wildfly-${wildfly.version}/modules/system/layers/base/nl/kvk/properties/configuration/main</outputDirectory>-->
-                                    <!--<resources>-->
-                                        <!--<resource>-->
-                                            <!--<directory>../hr-communicatie-service-resource/build/template/config/application</directory>-->
-                                            <!--<filtering>true</filtering>-->
-                                        <!--</resource>-->
-                                        <!--<resource>-->
-                                            <!--<directory>build/template/config/application</directory>-->
-                                        <!--</resource>-->
-                                    <!--</resources>-->
-                                <!--</configuration>-->
-                            <!--</execution>-->
-                        <!--</executions>-->
-                    <!--</plugin>-->
-                    <!--<plugin>-->
-                        <!--<artifactId>maven-clean-plugin</artifactId>-->
-                        <!--<configuration>-->
-                            <!--<filesets>-->
-                                <!--<fileset>-->
-                                    <!--<directory>wildfly/server/wildfly-${wildfly.version}/modules/system/layers/base/nl/kvk/properties/configuration/main</directory>-->
-                                    <!--<includes>-->
-                                        <!--<include>**/*</include>-->
-                                    <!--</includes>-->
-                                <!--</fileset>-->
-                            <!--</filesets>-->
-                        <!--</configuration>-->
-                    <!--</plugin>-->
-                <!--</plugins>-->
-                <!--<filters>-->
-                    <!--<filter>build/profile/application.properties</filter>-->
-                <!--</filters>-->
-            <!--</build>-->
-        <!--</profile>-->
-
         <profile>
             <id>install-wildfly</id>
             <build>
@@ -80,8 +32,8 @@
                                 <fileset>
                                     <directory>wildfly</directory>
                                     <includes>
-                                        <include>resource/**/*</include>
-                                        <include>server/**/*</include>
+                                    <include>resource/**/*</include>
+                                    <include>server/**/*</include>
                                     </includes>
                                 </fileset>
                             </filesets>
@@ -110,78 +62,47 @@
                                     </artifactItems>
                                 </configuration>
                             </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>add-db2-wildfly</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <executions>
                             <execution>
-                                <id>copy</id>
-                                <phase>generate-resources</phase>
+                                <id>add-datasource</id>
+                                <phase>package</phase>
                                 <goals>
-                                    <goal>copy</goal>
+                                    <goal>add-resource</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>wildfly/resource</outputDirectory>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>com.ibm.db2</groupId>
-                                            <artifactId>db2jcc4</artifactId>
-                                            <version>4.13.80</version>
-                                            <overWrite>true</overWrite>
-                                        </artifactItem>
-                                    </artifactItems>
+                                    <address>subsystem=datasources,data-source=java:jboss/myDs</address>
+                                    <resources>
+                                        <resource>
+                                            <properties>
+                                                <jndi-name>java:jboss/myDs</jndi-name>
+                                                <enabled>true</enabled>
+                                                <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</connection-url>
+                                                <driver-class>org.h2.Driver</driver-class>
+                                                <driver-name>h2</driver-name>
+                                                <user-name>sa</user-name>
+                                                <password>sa</password>
+                                            </properties>
+                                        </resource>
+                                    </resources>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
-                    <!--<plugin>-->
-                        <!--<groupId>org.apache.maven.plugins</groupId>-->
-                        <!--<artifactId>maven-resources-plugin</artifactId>-->
-                        <!--<executions>-->
-                            <!--<execution>-->
-                                <!--<id>copy-cli</id>-->
-                                <!--<phase>generate-resources</phase>-->
-                                <!--<goals>-->
-                                    <!--<goal>copy-resources</goal>-->
-                                <!--</goals>-->
-                                <!--<configuration>-->
-                                    <!--<outputDirectory>wildfly/cli</outputDirectory>-->
-                                    <!--<resources>-->
-                                        <!--<resource>-->
-                                            <!--<directory>build/template/cli</directory>-->
-                                            <!--<filtering>true</filtering>-->
-                                        <!--</resource>-->
-                                    <!--</resources>-->
-                                <!--</configuration>-->
-                            <!--</execution>-->
-                        <!--</executions>-->
-                    <!--</plugin>-->
-                    <!--<plugin>-->
-                        <!--<groupId>org.wildfly.plugins</groupId>-->
-                        <!--<artifactId>wildfly-maven-plugin</artifactId>-->
-                        <!--<configuration>-->
-                            <!--<jboss-home>wildfly/server/wildfly-${wildfly.version}</jboss-home>-->
-                            <!--<add-user>-->
-                                <!--<users>-->
-                                    <!--<user>-->
-                                        <!--<username>su</username>-->
-                                        <!--<password>pass_su</password>-->
-                                        <!--<groups>-->
-                                            <!--<group>superuser</group>-->
-                                        <!--</groups>-->
-                                        <!--<application-user>true</application-user>-->
-                                        <!--<realm>ApplicationRealm</realm>-->
-                                    <!--</user>-->
-                                <!--</users>-->
-                            <!--</add-user>-->
-                            <!--<scripts>-->
-                                <!--<script>wildfly/cli/commands.cli</script>-->
-                            <!--</scripts>-->
-                        <!--</configuration>-->
-                    <!--</plugin>-->
-
                 </plugins>
-                <filters>
-                    <filter>build/server.properties</filter>
-                </filters>
             </build>
         </profile>
     </profiles>
-
 </project>

@@ -2,6 +2,7 @@ package nl.gpesoft.persistence.base;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -16,7 +17,8 @@ public class PersistableEntity implements Serializable {
     private UUID reference;
 
     @Column (name="TIMESTAMP")
-    private long timeStamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timeStamp;
 
     public Long getId() {
         return id;
@@ -34,11 +36,11 @@ public class PersistableEntity implements Serializable {
         this.reference = reference;
     }
 
-    public long getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(long timeStamp) {
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 }

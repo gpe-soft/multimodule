@@ -1,12 +1,13 @@
-package nl.gpesoft.persistence;
+package nl.gpesoft.persistence.audit;
 
+import nl.gpesoft.persistence.Address;
 import nl.gpesoft.persistence.base.PersistableEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Address extends PersistableEntity {
+public class AddressAudited extends AuditableEntity {
 
     @Column (name = "STREET")
     private String street;

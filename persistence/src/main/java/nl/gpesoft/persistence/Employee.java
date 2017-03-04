@@ -1,10 +1,12 @@
 package nl.gpesoft.persistence;
 
+import nl.gpesoft.persistence.base.PersistableEntity;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Employee extends AbstractEntity {
+public class Employee extends PersistableEntity {
 
     @Column (name="EMPLOYEE_NUMBER", nullable = false, unique = true)
     private int employeeNumber;

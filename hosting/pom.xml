@@ -18,7 +18,11 @@
 
     <properties>
         <wildfly.version>10.1.0.Final</wildfly.version>
+        <jboss.home>wildfly/server/wildfly-${wildfly.version}</jboss.home>
+        <jboss.port>9999</jboss.port>
+        <server.config>standalone.xml</server.config>
     </properties>
+
 
     <profiles>
         <profile>
@@ -32,8 +36,9 @@
                                 <fileset>
                                     <directory>wildfly</directory>
                                     <includes>
-                                    <include>resource/**/*</include>
-                                    <include>server/**/*</include>
+                                        <include>cli/**/*</include>
+                                        <include>resource/**/*</include>
+                                        <include>server/**/*</include>
                                     </includes>
                                 </fileset>
                             </filesets>
@@ -64,39 +69,34 @@
                             </execution>
                         </executions>
                     </plugin>
-                </plugins>
-            </build>
-        </profile>
+                    </plugins>
+                </build>
+            </profile>
 
         <profile>
-            <id>add-db2-wildfly</id>
+            <id>add-db2-library-wildfly</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>add-datasource</id>
-                                <phase>package</phase>
+                                <id>copy</id>
+                                <phase>generate-resources</phase>
                                 <goals>
-                                    <goal>add-resource</goal>
+                                    <goal>copy</goal>
                                 </goals>
                                 <configuration>
-                                    <address>subsystem=datasources,data-source=java:jboss/myDs</address>
-                                    <resources>
-                                        <resource>
-                                            <properties>
-                                                <jndi-name>java:jboss/myDs</jndi-name>
-                                                <enabled>true</enabled>
-                                                <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</connection-url>
-                                                <driver-class>org.h2.Driver</driver-class>
-                                                <driver-name>h2</driver-name>
-                                                <user-name>sa</user-name>
-                                                <password>sa</password>
-                                            </properties>
-                                        </resource>
-                                    </resources>
+                                    <outputDirectory>wildfly/resource</outputDirectory>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>com.ibm.db2</groupId>
+                                            <artifactId>db2jcc4</artifactId>
+                                            <version>4.13.80</version>
+                                            <overWrite>true</overWrite>
+                                        </artifactItem>
+                                    </artifactItems>
                                 </configuration>
                             </execution>
                         </executions>
@@ -104,5 +104,89 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>start-wildfly</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <executions>
+                            <!-- Undeploy the application on clean -->
+                            <execution>
+                                <id>undeploy</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>undeploy</goal>
+                                </goals>
+                                <configuration>
+                                    <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                                </configuration>
+                            </execution>
+
+                            <!-- Start WildFly -->
+                            <execution>
+                                <id>start-WildFly</id>
+                                <phase>install</phase>
+                                <configuration>
+                                    <jboss-home>${jboss.home}</jboss-home>
+                                    <port>${jboss.port}</port>
+                                </configuration>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+
+                            <!-- Add a data source -->
+                            <execution>
+                                <id>add-datasource</id>
+                                <phase>install</phase>
+                                <configuration>
+                                    <address>subsystem=datasources,data-source=myDatasource</address>
+                                    <resources>
+                                        <resource>
+                                            <enableResource>true</enableResource>
+                                            <properties>
+                                                <connection-url>jdbc:postgresql://localhost/myDatabase</connection-url>
+                                                <jndi-name>java:jboss/myDatasource</jndi-name>
+                                                <enabled>true</enabled>
+                                                <enable>true</enable>
+                                                <user-name>dbuser</user-name>
+                                                <password>supersecret</password>
+                                                <driver-name>postgresql.jar</driver-name>
+                                                <use-ccm>false</use-ccm>
+                                            </properties>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                                <goals>
+                                    <goal>add-resource</goal>
+                                </goals>
+                            </execution>
+
+                            <!-- Deploy the application on install -->
+                            <execution>
+                                <id>deploy</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

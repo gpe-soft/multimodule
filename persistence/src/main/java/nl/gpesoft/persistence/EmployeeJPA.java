@@ -20,10 +20,6 @@ public class EmployeeJPA extends PersistableEntity {
     @Column (name="EMPLOYED_DATE")
     private Date employedDate;
 
-    @OneToOne (optional = false, orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(name="ADDRESS_ID")
-    private AddressJPA addressJPA;
-
     public int getEmployeeNumber() {
         return employeeNumber;
     }
@@ -56,11 +52,4 @@ public class EmployeeJPA extends PersistableEntity {
         this.employedDate = employedDate;
     }
 
-    public AddressJPA getAddressJPA() {
-        return addressJPA;
-    }
-
-    public void setAddressJPA(AddressJPA addressJPA) {
-        this.addressJPA = addressJPA;
-    }
 }

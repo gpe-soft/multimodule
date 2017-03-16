@@ -1,6 +1,5 @@
 package nl.gpesoft.domain;
 
-import nl.gpesoft.persistence.AddressJPA;
 import nl.gpesoft.persistence.base.PersistableEntity;
 
 import java.util.Date;

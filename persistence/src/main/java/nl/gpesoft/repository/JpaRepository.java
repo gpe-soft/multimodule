@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public abstract class JpaRepository<E, K> implements Repository<E, K> {
+public abstract class JpaRepository<E> implements Repository<E> {
 
     protected Class<E> entityClass;
 
@@ -29,7 +29,7 @@ public abstract class JpaRepository<E, K> implements Repository<E, K> {
         entityManager.remove(entity);
     }
 
-    public E getById(K id) {
+    public E getById(Long id) {
         return entityManager.find(entityClass, id);
     }
 

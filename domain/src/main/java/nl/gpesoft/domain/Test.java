@@ -3,7 +3,7 @@ package nl.gpesoft.domain;
 
 import nl.gpesoft.domain.convertor.EmployeeConvertor;
 import nl.gpesoft.persistence.model.EmployeeEntity;
-import nl.gpesoft.repository.EmployeeRepository;
+import nl.gpesoft.repository.EmployeeJpaRepository;
 
 public class Test {
     public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class Test {
         employee.setName("Piet");
         EmployeeEntity employeeEntity = EmployeeConvertor.convertToPersistence(employee);
 
-        EmployeeRepository employeeRepository = new EmployeeRepository();
+        EmployeeJpaRepository employeeRepository = new EmployeeJpaRepository();
         employeeRepository.add(employeeEntity);
     }
 }

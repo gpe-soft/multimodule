@@ -1,10 +1,8 @@
 package nl.gpesoft.domain;
 
-import nl.gpesoft.persistence.base.PersistableEntity;
-
 import java.util.Date;
 
-public class Employee extends PersistableEntity {
+public class Employee {
 
     private int employeeNumber;
     private int socialSecurityNumber;

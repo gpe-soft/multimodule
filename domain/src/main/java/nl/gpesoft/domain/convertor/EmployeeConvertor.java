@@ -2,17 +2,17 @@ package nl.gpesoft.domain.convertor;
 
 
 import nl.gpesoft.domain.Employee;
-import nl.gpesoft.persistence.EmployeeJPA;
+import nl.gpesoft.persistence.model.EmployeeEntity;
 
 public class EmployeeConvertor {
 
-    public static EmployeeJPA convertToPersistence (Employee employee) {
-        EmployeeJPA employeeJPA = new EmployeeJPA();
+    public static EmployeeEntity convertToPersistence (Employee employee) {
+        EmployeeEntity employeeJPA = new EmployeeEntity();
         employeeJPA.setName(employee.getName());
         return employeeJPA;
     }
 
-    public static Employee convertToDomain (EmployeeJPA employeeJPA) {
+    public static Employee convertToDomain (EmployeeEntity employeeJPA) {
         Employee employee = new Employee();
         employee.setName(employeeJPA.getName());
         return employee;

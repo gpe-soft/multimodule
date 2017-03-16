@@ -1,4 +1,4 @@
-package nl.gpesoft.persistence;
+package nl.gpesoft.persistence.model;
 
 import nl.gpesoft.persistence.base.PersistableEntity;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class EmployeeJPA extends PersistableEntity {
+public class EmployeeEntity extends PersistableEntity {
 
     @Column (name="EMPLOYEE_NUMBER", nullable = false, unique = true)
     private int employeeNumber;

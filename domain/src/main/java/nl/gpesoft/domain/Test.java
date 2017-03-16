@@ -2,17 +2,17 @@ package nl.gpesoft.domain;
 
 
 import nl.gpesoft.domain.convertor.EmployeeConvertor;
-import nl.gpesoft.persistence.EmployeeJPA;
-import nl.gpesoft.repository.EmployeeJpaDao;
+import nl.gpesoft.persistence.model.EmployeeEntity;
+import nl.gpesoft.repository.EmployeeRepository;
 
 public class Test {
     public static void main(String[] args) {
 
         Employee employee = new Employee();
         employee.setName("Piet");
-        EmployeeJPA employeeJPA = EmployeeConvertor.convertToPersistence(employee);
+        EmployeeEntity employeeJPA = EmployeeConvertor.convertToPersistence(employee);
 
-        EmployeeJpaDao employeeJpaDao = new EmployeeJpaDao();
+        EmployeeRepository employeeJpaDao = new EmployeeRepository();
         employeeJpaDao.persist(employeeJPA);
     }
 }

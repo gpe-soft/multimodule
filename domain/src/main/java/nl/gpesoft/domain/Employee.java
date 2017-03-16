@@ -10,7 +10,6 @@ public class Employee extends PersistableEntity {
     private int socialSecurityNumber;
     private String name;
     private Date employedDate;
-    private AddressJPA addressJPA;
 
     public int getEmployeeNumber() {
         return employeeNumber;
@@ -42,13 +41,5 @@ public class Employee extends PersistableEntity {
 
     public void setEmployedDate(Date employedDate) {
         this.employedDate = employedDate;
-    }
-
-    public AddressJPA getAddressJPA() {
-        return addressJPA;
-    }
-
-    public void setAddressJPA(AddressJPA addressJPA) {
-        this.addressJPA = addressJPA;
     }
 }

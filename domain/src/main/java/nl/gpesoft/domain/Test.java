@@ -7,12 +7,11 @@ import nl.gpesoft.repository.EmployeeRepository;
 
 public class Test {
     public static void main(String[] args) {
-
         Employee employee = new Employee();
         employee.setName("Piet");
-        EmployeeEntity employeeJPA = EmployeeConvertor.convertToPersistence(employee);
+        EmployeeEntity employeeEntity = EmployeeConvertor.convertToPersistence(employee);
 
-        EmployeeRepository employeeJpaDao = new EmployeeRepository();
-        employeeJpaDao.persist(employeeJPA);
+        EmployeeRepository employeeRepository = new EmployeeRepository();
+        employeeRepository.add(employeeEntity);
     }
 }

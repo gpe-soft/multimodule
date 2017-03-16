@@ -12,9 +12,9 @@ public class EmployeeConvertor {
         return employeeJPA;
     }
 
-    public static Employee convertToDomain (EmployeeEntity employeeJPA) {
+    public static Employee convertToDomain (EmployeeEntity employeeEntity) {
         Employee employee = new Employee();
-        employee.setName(employeeJPA.getName());
+        employee.setName(employeeEntity.getName());
         return employee;
     }
 }

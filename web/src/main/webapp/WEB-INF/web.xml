@@ -16,5 +16,4 @@
         <url-pattern>/testservlet</url-pattern>
     </servlet-mapping>
 
-
 </web-app>

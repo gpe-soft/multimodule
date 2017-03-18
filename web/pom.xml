@@ -17,6 +17,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>nl.gpesoft</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>

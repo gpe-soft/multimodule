@@ -1,5 +1,8 @@
 package nl.gpesoft.web.endpoint;
 
+import nl.gpesoft.domain.Employee;
+import nl.gpesoft.domain.repository.EmployeeRepository;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -20,13 +23,15 @@ public class TestServlet extends HttpServlet {
             response.sendError(500, "Encoding not supported");
         }
         response.setContentType("text/html");
-        TestDelegate testDelegate = new TestDelegate();
         String name = request.getParameter("name");
         if (!name.isEmpty()) {
-            id = testDelegate.saveTest(name);
+            EmployeeRepository employeeRepository = new EmployeeRepository();
+            Employee employee = new Employee();
+            employee.setName(request.getParameter("name"));
+            id = employeeRepository.addNewEmployee(employee);
         }
         ServletOutputStream outputStream = response.getOutputStream();
-        outputStream.println("<html><body>TestEntity toegevoegd met id: " + id);
+        outputStream.println("<html><body>Employee added with id: " + id);
         outputStream.println("</body></html>");
         outputStream.close();
     }

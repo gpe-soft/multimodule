@@ -31,7 +31,7 @@ public class TestServlet extends HttpServlet {
             id = employeeRepository.addNewEmployee(employee);
         }
         ServletOutputStream outputStream = response.getOutputStream();
-        outputStream.println("<html><body>Employee added with id: " + id);
+        outputStream.println("<html><body>IEmployee added with id: " + id);
         outputStream.println("</body></html>");
         outputStream.close();
     }

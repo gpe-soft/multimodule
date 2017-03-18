@@ -83,17 +83,17 @@
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
                         <executions>
-                            <execution>
-                                <id>shutdown-WildFly</id>
-                                <phase>install</phase>
-                                <configuration>
-                                    <reload>false</reload>
-                                    <port>${jboss.port}</port>
-                                </configuration>
-                                <goals>
-                                    <goal>shutdown</goal>
-                                </goals>
-                            </execution>
+                            <!--<execution>-->
+                                <!--<id>shutdown-WildFly</id>-->
+                                <!--<phase>install</phase>-->
+                                <!--<configuration>-->
+                                    <!--<reload>true</reload>-->
+                                    <!--<port>${jboss.port}</port>-->
+                                <!--</configuration>-->
+                                <!--<goals>-->
+                                    <!--<goal>shutdown</goal>-->
+                                <!--</goals>-->
+                            <!--</execution>-->
                             <execution>
                                 <id>start-WildFly</id>
                                 <phase>install</phase>

@@ -42,11 +42,18 @@
                 <executions>
                     <execution>
                         <id>deploy-jar</id>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>deploy-file</goal>
                         </goals>
                         <configuration>
-                            <file>target/${artifactId}-${version}-${jar.classifier}.jar</file>
+                            <groupId>nl.gpesoft</groupId>
+                            <artifactId>web</artifactId>
+                            <packaging>jar</packaging>
+                            <version>${project.version}</version>
+                            <classifier>client</classifier>
+                            <url>file:///C:/java/m3-repo</url>
+                            <file>target/${project.artifactId}-${project.version}-client.jar</file>
                         </configuration>
                     </execution>
                 </executions>

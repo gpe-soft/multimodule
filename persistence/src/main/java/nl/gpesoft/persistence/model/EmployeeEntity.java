@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name="employee")
 public class EmployeeEntity extends PersistableEntity {
 
     @Column (name="EMPLOYEE_NUMBER", nullable = false, unique = true)

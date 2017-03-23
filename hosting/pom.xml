@@ -168,7 +168,7 @@
                                             <properties>
                                                 <jndi-name>java:jboss/multiModuleDs</jndi-name>
                                                 <enabled>true</enabled>
-                                                <connection-url>jdbc:mysql://localhost:3306/multimodule</connection-url>
+                                                <connection-url>jdbc:mysql://localhost:3306</connection-url>
                                                 <driver-class>com.mysql.jdbc.Driver</driver-class>
                                                 <driver-name>mysql-connector-java-${mysql.driver.version}.jar</driver-name>
                                                 <user-name>mysql</user-name>

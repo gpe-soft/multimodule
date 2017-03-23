@@ -12,11 +12,6 @@ public abstract class JpaRepository<E> implements Repository<E> {
     @PersistenceContext(name = "multimodule")
     protected EntityManager entityManager;
 
-    public JpaRepository() {
-        ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-        this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];
-    }
-
     public void add(E entity) {
         entityManager.persist(entity);
     }

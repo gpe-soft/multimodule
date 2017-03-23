@@ -23,6 +23,7 @@
         <jboss.home>wildfly/server/wildfly-${wildfly.version}</jboss.home>
         <jboss.port>9990</jboss.port>
         <server.config>standalone.xml</server.config>
+        <mysql.driver.version>6.0.5</mysql.driver.version>
     </properties>
 
     <profiles>
@@ -73,6 +74,63 @@
         </profile>
 
         <profile>
+            <id>shutdown-wildfly</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>shutdown-WildFly</id>
+                                <phase>install</phase>
+                                <configuration>
+                                    <reload>false</reload>
+                                    <port>${jboss.port}</port>
+                                </configuration>
+                                <goals>
+                                    <goal>shutdown</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>start-wildfly</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>start-WildFly</id>
+                                <phase>install</phase>
+                                <configuration>
+                                    <jboss-home>${jboss.home}</jboss-home>
+                                    <port>${jboss.port}</port>
+                                    
+                                </configuration>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
             <id>add-mysql-datasource-wildfly</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -83,28 +141,6 @@
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
                         <executions>
-                            <!--<execution>-->
-                                <!--<id>shutdown-WildFly</id>-->
-                                <!--<phase>install</phase>-->
-                                <!--<configuration>-->
-                                    <!--<reload>true</reload>-->
-                                    <!--<port>${jboss.port}</port>-->
-                                <!--</configuration>-->
-                                <!--<goals>-->
-                                    <!--<goal>shutdown</goal>-->
-                                <!--</goals>-->
-                            <!--</execution>-->
-                            <execution>
-                                <id>start-WildFly</id>
-                                <phase>install</phase>
-                                <configuration>
-                                    <jboss-home>${jboss.home}</jboss-home>
-                                    <port>${jboss.port}</port>
-                                </configuration>
-                                <goals>
-                                    <goal>start</goal>
-                                </goals>
-                            </execution>
                             <execution>
                                 <id>deploy-jdbc-driver</id>
                                 <phase>install</phase>
@@ -112,10 +148,9 @@
                                     <goal>deploy-artifact</goal>
                                 </goals>
                                 <configuration>
-                                    <force>true</force>
                                     <groupId>mysql</groupId>
                                     <artifactId>mysql-connector-java</artifactId>
-                                    <name>MySqlCustom</name>
+                                    <name>mysql-connector-java-${mysql.driver.version}.jar</name>
                                 </configuration>
                             </execution>
                             <execution>
@@ -126,17 +161,18 @@
                                 </goals>
                                 <configuration>
                                     <force>true</force>
+                                    <jboss-home>${jboss.home}</jboss-home>
                                     <address>subsystem=datasources,data-source=java:jboss/multiModuleDs</address>
                                     <resources>
                                         <resource>
                                             <properties>
                                                 <jndi-name>java:jboss/multiModuleDs</jndi-name>
                                                 <enabled>true</enabled>
-                                                <connection-url>jdbc:mysql://localhost:3306</connection-url>
+                                                <connection-url>jdbc:mysql://localhost:3306/multimodule</connection-url>
                                                 <driver-class>com.mysql.jdbc.Driver</driver-class>
-                                                <driver-name>mySqlCustom</driver-name>
-                                                <user-name>dbuser</user-name>
-                                                <password>password-for-dbuser</password>
+                                                <driver-name>mysql-connector-java-${mysql.driver.version}.jar</driver-name>
+                                                <user-name>mysql</user-name>
+                                                <password>mysql</password>
                                             </properties>
                                         </resource>
                                     </resources>
@@ -153,6 +189,10 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.xnio</groupId>
+            <artifactId>xnio-api</artifactId>
         </dependency>
     </dependencies>
 

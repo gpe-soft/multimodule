@@ -1,13 +1,14 @@
 package nl.gpesoft.repository;
 
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
+
+@Startup
+@Singleton
 public class Repositories {
 
-    private static final Repositories INSTANCE = new Repositories();
-
-    public static Repositories get() {
-        return INSTANCE;
-    }
-
+    @Inject
     private EmployeeJpaRepository employeeRepository;
 
     private Repositories() {
@@ -17,7 +18,4 @@ public class Repositories {
         return employeeRepository;
     }
 
-    public void setEmployeeRepository(EmployeeJpaRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 }

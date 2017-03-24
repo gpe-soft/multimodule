@@ -25,12 +25,12 @@
             <dependency>
                 <groupId>nl.gpesoft</groupId>
                 <artifactId>domain</artifactId>
-                <version>1.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>nl.gpesoft</groupId>
                 <artifactId>persistence</artifactId>
-                <version>1.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>

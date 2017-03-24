@@ -8,16 +8,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("employee/{id}")
 public class EmployeeService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Employee getEmployee(@PathParam("id") Long id) {
+    public Response getEmployee(@PathParam("id") Long id) {
         Employee employee = new Employee();
         EmployeeRepository employeeRepository = new EmployeeRepository();
         employeeRepository.getNumberOfEmployees();
-        return employee;
+        return Response.status(200).entity(employee).build();
     }
 }

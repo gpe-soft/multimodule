@@ -3,7 +3,7 @@ package nl.gpesoft.domain;
 
 import nl.gpesoft.domain.convertor.EmployeeConvertor;
 import nl.gpesoft.persistence.model.EmployeeEntity;
-import nl.gpesoft.repository.EmployeeJpaRepository;
+import nl.gpesoft.persistence.repository.EmployeeJpaRepository;
 
 public class Test {
     public static void main(String[] args) {

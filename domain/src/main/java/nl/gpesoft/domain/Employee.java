@@ -1,7 +1,10 @@
 package nl.gpesoft.domain;
 
+import lombok.Builder;
+
 import java.util.Date;
 
+@Builder
 public class Employee {
 
     private int employeeNumber;

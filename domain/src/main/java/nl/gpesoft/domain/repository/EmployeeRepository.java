@@ -1,16 +1,19 @@
 package nl.gpesoft.domain.repository;
 
 import nl.gpesoft.domain.Employee;
+import nl.gpesoft.domain.convertor.EmployeeConvertor;
+import nl.gpesoft.persistence.repository.EmployeeJpaRepository;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+@Stateless
 public class EmployeeRepository {
 
-    public int getNumberOfEmployees() {
-        int numberEmployees = 0;
-        return numberEmployees;
-    }
+    @Inject
+    private EmployeeJpaRepository employeeJpaRepository;
 
-    public Long addNewEmployee(Employee employee) {
-        Long idNewEmployee = 0L;
-        return idNewEmployee;
+    public Employee getEmployee(Long id) {
+        return EmployeeConvertor.convertToDomain(employeeJpaRepository.getById(id));
     }
 }

@@ -1,5 +1,6 @@
 package nl.gpesoft.persistence.model;
 
+import lombok.Builder;
 import nl.gpesoft.persistence.base.PersistableEntity;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="employee")
+@Builder
 public class EmployeeEntity extends PersistableEntity {
 
     @Column (name="EMPLOYEE_NUMBER", nullable = false, unique = true)

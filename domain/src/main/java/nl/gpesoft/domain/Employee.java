@@ -1,7 +1,6 @@
 package nl.gpesoft.domain;
 
 import lombok.Builder;
-
 import java.util.Date;
 
 @Builder
